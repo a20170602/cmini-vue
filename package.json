@@ -1,0 +1,20 @@
+{
+  "name": "cmini-vue",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:a20170602/cmini-vue.git",
+  "author": "cjylxl <cjylxl0602@126.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.12",
+    "@babel/preset-env": "^7.17.12",
+    "@babel/preset-typescript": "^7.17.12",
+    "@types/jest": "^27.5.1",
+    "babel-jest": "^28.1.0",
+    "jest": "^28.1.0",
+    "typescript": "^4.6.4"
+  }
+}
