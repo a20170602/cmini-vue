@@ -7,13 +7,15 @@ class ReactiveEffect{
   run(){
     /** 添加当前活动effect */ 
     activeEffect = this;
-    this._fn();
+    return this._fn();
   }
 }
 
 export function effect(fn:() => void){
-  const reactiveEffect = new ReactiveEffect(fn);
-  reactiveEffect.run();
+  const _effect = new ReactiveEffect(fn);
+  _effect.run();
+  /** 要让this指向当前实例 */
+  return _effect.run.bind(_effect);
 }
 
 /** 收集依赖 */ 
