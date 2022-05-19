@@ -1,6 +1,7 @@
 class ReactiveEffect{
   private _fn: any;
-  constructor(fn:()=>void){
+  /** 这写法厉害 */
+  constructor(fn:()=>any, public scheduler?:()=>void){
     this._fn = fn
   }
 
@@ -11,8 +12,8 @@ class ReactiveEffect{
   }
 }
 
-export function effect(fn:() => void){
-  const _effect = new ReactiveEffect(fn);
+export function effect(fn:() => any , options:any = {}){
+  const _effect = new ReactiveEffect(fn, options.scheduler);
   _effect.run();
   /** 要让this指向当前实例 */
   return _effect.run.bind(_effect);
@@ -43,6 +44,10 @@ export function trigger(target:any, key:string | symbol) {
   const depMaps = targetMaps.get(target);
   const dep = depMaps.get(key);
   for (const effect of dep) {
-    effect.run();
+    if(effect.scheduler){
+      effect.scheduler()
+    }else{
+      effect.run();
+    }
   }
 }
